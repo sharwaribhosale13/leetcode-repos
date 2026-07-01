@@ -1,35 +1,45 @@
+
+
+import java.util.*;
+
 class Solution {
+    // Function to search target in 2D matrix using binary search
     public boolean searchMatrix(int[][] matrix, int target) {
-        int m=matrix.length;
-        int n=matrix[0].length;
+        // Get the number of rows
+        int n = matrix.length;
 
-        int left=0;
-        int right=m*n-1;
+        // Get the number of columns
+        int m = matrix[0].length;
 
-        while (left<=right)
-        {
-            int mid=left+ (right-left)/2;
-            int midvalue=matrix[mid/n][mid%n];
+        // Set initial binary search range
+        int low = 0, high = n * m - 1;
 
-            if(midvalue==target)
-            {
+        // Perform binary search
+        while (low <= high) {
+            // Calculate middle index
+            int mid = (low + high) / 2;
+
+            // Map 1D index to 2D coordinates
+            int row = mid / m;
+            int col = mid % m;
+
+            // Check if target is found
+            if (matrix[row][col] == target)
                 return true;
-            }
-            else if(midvalue<target)
-            {
-                left=mid+1;
-            }
+
+            // Discard left half
+            else if (matrix[row][col] < target)
+                low = mid + 1;
+
+            // Discard right half
             else
-            {
-                right=mid-1;
-            }
-
-            
-
-            
+                high = mid - 1;
         }
-        return false;
 
-        
+        // Target not found
+        return false;
     }
 }
+
+// Driver class
+
