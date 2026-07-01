@@ -28,14 +28,3 @@ class Solution {
     }
 }
 
-// separate main class
-public class Main {
-    // program entry
-    public static void main(String[] args) {
-        // initialize input
-        int[] arr = new int[]{1, 3, 4, 2, 3};
-
-        // compute and print result
-        System.out.println("The duplicate element is " + Solution.findDuplicate(arr));
-    }
-}
