@@ -42,3 +42,16 @@ class Solution {
     }
 }
 
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 0, -1, 0, -2, 2};
+        int target = 0;
+
+        Solution obj = new Solution();
+        List<List<Integer>> ans = obj.fourSum(arr, target);
+
+        for (List<Integer> quad : ans) {
+            System.out.println(quad);
+        }
+    }
+}
