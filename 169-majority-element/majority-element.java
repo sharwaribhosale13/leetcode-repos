@@ -1,19 +1,14 @@
 import java.util.*;
 
-// Class containing the majority element logic
 class Solution {
-    // Function to find the majority element in an array
     public int majorityElement(int[] nums) {
-        // Size of the given array
-        int n = nums.length;
         
-        // Count variable
+        int n = nums.length;
+      
         int cnt = 0;
         
-        // Candidate element
         int el = 0;
-        
-        // Step 1: Find the potential majority element
+      
         for (int i = 0; i < n; i++) {
             if (cnt == 0) {
                 cnt = 1;
@@ -24,8 +19,7 @@ class Solution {
                 cnt--;
             }
         }
-        
-        // Step 2: Verify the candidate
+       
         int cnt1 = 0;
         for (int i = 0; i < n; i++) {
             if (nums[i] == el) {
@@ -33,12 +27,10 @@ class Solution {
             }
         }
         
-        // Return the element if it's a majority
         if (cnt1 > (n / 2)) {
             return el;
         }
-        
-        // No majority found
+      
         return -1;
     }
 }
