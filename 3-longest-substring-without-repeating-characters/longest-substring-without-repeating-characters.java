@@ -1,32 +1,48 @@
+import java.util.*;
+
 class Solution {
+    /* Function to find the longest substring
+       without repeating characters */
     public int lengthOfLongestSubstring(String s) {
-        if(s==null|| s.length()==0)
-        {
-            return 0;
+        int n = s.length();
 
-        }
-        if(s.length()==1)
-        {
-            return 1;
-        }
-        int left=0;
-        int right=0;
-        int ans=0;
+        // Assuming all ASCII characters
+        int HashLen = 256;
 
-        HashSet<Character>set=new HashSet<>();
+        /* Hash table to store last
+           occurrence of each character */
+        int[] hash = new int[HashLen];
 
-        while(right<s.length())
-        {
-            char c=s.charAt(right);
-            while(set.contains(c))
-            {
-                set.remove(s.charAt(left));
-                left++;
+        /* Initialize hash table with
+           -1 (indicating no occurrence) */
+        Arrays.fill(hash, -1);
+
+        int l = 0, r = 0, maxLen = 0;
+        while (r < n) {
+            /* If current character s.charAt(r) 
+               is already in the substring */
+            if (hash[s.charAt(r)] >= l) {
+                /* Move left pointer to the right
+                   of the last occurrence of s.charAt(r) */
+                l = Math.max(hash[s.charAt(r)] + 1, l);
             }
-            set.add(c);
-            ans=Math.max(ans,right-left+1);
-            right++;
+
+            // Calculate the current substring length
+            int len = r - l + 1;
+
+            // Update maximum length found so far
+            maxLen = Math.max(len, maxLen);
+
+            /* Store the index of the current
+               character in the hash table */
+            hash[s.charAt(r)] = r;
+
+            // Move right pointer to next position
+            r++;
         }
-        return ans;
+
+        // Return the maximum length found
+        return maxLen;
     }
 }
+
