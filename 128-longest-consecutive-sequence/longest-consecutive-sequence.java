@@ -1,37 +1,48 @@
+import java.util.*;
+
 class Solution {
     public int longestConsecutive(int[] nums) {
-        if(nums.length==0)
-        {
-            return 0;
-        }
-        HashSet<Integer>numSet=new HashSet<>();
-        for(int i=0;i<nums.length;i++)
-        {
-            numSet.add(nums[i]);
-        }
-        int longestSub=1;
+        // Get the length of the array
+        int n = nums.length;
 
-        for(int num:numSet)
-        {
-            if(numSet.contains(num-1))
-            {
-                continue;
-            }
-            else
-            {
-                int currentNum=num;
-                int currentSub=1;
-                while(numSet.contains(currentNum+1))
-                {
-                    currentNum++;
-                    currentSub++;
+        // If the array is empty, no sequence exists
+        if (n == 0) return 0;
 
+        // Variable to store the longest sequence length found
+        int longest = 1; 
+
+        // HashSet to store unique elements for O(1) lookup
+        Set<Integer> st = new HashSet<>();
+
+        // Add all elements to the set to remove duplicates
+        for (int i = 0; i < n; i++) {
+            st.add(nums[i]);
+        }
+
+        /* Loop through each element in the set to find 
+           the starting point of consecutive sequences */
+        for (int it : st) {
+            // If there is no number before 'it', it’s the start of a sequence
+            if (!st.contains(it - 1)) {
+                // Start the count for this sequence
+                int cnt = 1; 
+                // Store the current number
+                int x = it; 
+
+                // Keep checking for the next consecutive number
+                while (st.contains(x + 1)) {
+                    // Move to the next number in sequence
+                    x = x + 1; 
+                    // Increment the length of current sequence
+                    cnt = cnt + 1; 
                 }
-                longestSub=Math.max(longestSub,currentSub);
-            }
 
+                // Update the longest sequence length if needed
+                longest = Math.max(longest, cnt);
+            }
         }
-        return longestSub;
-        
+
+        // Return the length of the longest sequence
+        return longest;
     }
 }
