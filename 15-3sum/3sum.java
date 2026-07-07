@@ -3,36 +3,41 @@ class Solution {
 
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
 
-        for (int i = 0; i < nums.length - 2; i++) {
+        for (int i = 0; i < n - 2; i++) {
 
+            // Skip duplicate first element
             if (i > 0 && nums[i] == nums[i - 1])
                 continue;
 
-            int j = i + 1;
-            int k = nums.length - 1;
+            int left = i + 1;
+            int right = n - 1;
 
-            while (j < k) {
+            while (left < right) {
 
-                int sum = nums[i] + nums[j] + nums[k];
+                int sum = nums[i] + nums[left] + nums[right];
 
                 if (sum == 0) {
 
-                    ans.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    ans.add(Arrays.asList(nums[i], nums[left], nums[right]));
 
-                    j++;
-                    k--;
+                    left++;
+                    right--;
 
-                    while (j < k && nums[j] == nums[j - 1])
-                        j++;
+                    // Skip duplicates
+                    while (left < right && nums[left] == nums[left - 1])
+                        left++;
 
-                    while (j < k && nums[k] == nums[k + 1])
-                        k--;
+                    while (left < right && nums[right] == nums[right + 1])
+                        right--;
 
-                } else if (sum < 0) {
-                    j++;
-                } else {
-                    k--;
+                } 
+                else if (sum < 0) {
+                    left++;
+                } 
+                else {
+                    right--;
                 }
             }
         }
