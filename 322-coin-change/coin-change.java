@@ -28,13 +28,3 @@ class Solution {
     }
 }
 
-// Driver class
-public class Main {
-    public static void main(String[] args) {
-        int[] coins = {1, 2, 5};
-        int amount = 11;
-
-        Solution obj = new Solution();
-        System.out.println(obj.coinChange(coins, amount));
-    }
-}
