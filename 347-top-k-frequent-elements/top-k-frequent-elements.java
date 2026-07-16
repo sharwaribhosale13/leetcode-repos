@@ -4,43 +4,30 @@ class Solution {
 
     public int[] topKFrequent(int[] nums, int k) {
 
-        // Count frequency of each number
+        // Count frequency
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int num : nums)
             map.put(num, map.getOrDefault(num, 0) + 1);
 
-        // Bucket array: index = frequency
-        List<Integer>[] bucket = new ArrayList[nums.length + 1];
+        // Min Heap based on frequency
+        PriorityQueue<Integer> pq =
+                new PriorityQueue<>((a, b) -> map.get(a) - map.get(b));
 
-        // Put numbers into their frequency bucket
+        // Keep only k most frequent elements
         for (int num : map.keySet()) {
 
-            int freq = map.get(num);
+            pq.offer(num);
 
-            if (bucket[freq] == null)
-                bucket[freq] = new ArrayList<>();
-
-            bucket[freq].add(num);
+            if (pq.size() > k)
+                pq.poll();
         }
 
+        // Store answer
         int[] ans = new int[k];
-        int index = 0;
 
-        // Traverse buckets from highest frequency
-        for (int i = bucket.length - 1; i >= 0 && index < k; i--) {
-
-            if (bucket[i] != null) {
-
-                for (int num : bucket[i]) {
-
-                    ans[index++] = num;
-
-                    if (index == k)
-                        break;
-                }
-            }
-        }
+        for (int i = k - 1; i >= 0; i--)
+            ans[i] = pq.poll();
 
         return ans;
     }
