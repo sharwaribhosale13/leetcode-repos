@@ -2,18 +2,21 @@ import java.util.*;
 
 class MedianFinder {
 
-    PriorityQueue<Integer> small; // Max Heap
-    PriorityQueue<Integer> large; // Min Heap
+    PriorityQueue<Integer> small = new PriorityQueue<>(Collections.reverseOrder()); // Max Heap
+    PriorityQueue<Integer> large = new PriorityQueue<>();                           // Min Heap
 
-    public MedianFinder() {
-        small = new PriorityQueue<>(Collections.reverseOrder());
-        large = new PriorityQueue<>();
-    }
+    public MedianFinder() {}
 
     public void addNum(int num) {
 
-        small.offer(num);
-        large.offer(small.poll());
+        if (small.isEmpty() || num <= small.peek())
+            small.offer(num);
+        else
+            large.offer(num);
+
+        // Balance heaps
+        if (small.size() > large.size() + 1)
+            large.offer(small.poll());
 
         if (large.size() > small.size())
             small.offer(large.poll());
