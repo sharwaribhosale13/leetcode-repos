@@ -12,7 +12,7 @@ class Solution {
 
                 if (board[i][j] != '.') {
 
-                    int num = board[i][j] - '0';
+                    int num = board[i][j]-'0' ;
                     int b = (i / 3) * 3 + (j / 3);
 
                     row[i][num] = true;
