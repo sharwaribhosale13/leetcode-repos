@@ -57,7 +57,7 @@ class LFUCache {
 
     private void update(Node node) {
 
-        keyNode.remove(node.key);
+      
 
         DLL list = freqMap.get(node.cnt);
         list.removeNode(node);
