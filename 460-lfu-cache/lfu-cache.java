@@ -3,66 +3,83 @@ import java.util.*;
 class LFUCache {
 
     class Node {
-        int key, value, freq;
+        int key, value, cnt;
         Node prev, next;
 
         Node(int key, int value) {
             this.key = key;
             this.value = value;
-            this.freq = 1;
+            this.cnt = 1;
         }
     }
 
     class DLL {
-        Node head = new Node(0, 0);
-        Node tail = new Node(0, 0);
-        int size = 0;
+        int size;
+        Node head, tail;
 
         DLL() {
+            head = new Node(0, 0);
+            tail = new Node(0, 0);
             head.next = tail;
             tail.prev = head;
         }
 
-        void add(Node node) {
-            node.next = head.next;
+        void addFront(Node node) {
+            Node temp = head.next;
+            node.next = temp;
             node.prev = head;
-            head.next.prev = node;
             head.next = node;
+            temp.prev = node;
             size++;
         }
 
-        void remove(Node node) {
+        void removeNode(Node node) {
             node.prev.next = node.next;
             node.next.prev = node.prev;
             size--;
         }
-
-        Node removeLast() {
-            if (size == 0)
-                return null;
-
-            Node node = tail.prev;
-            remove(node);
-            return node;
-        }
     }
 
-    int capacity, minFreq = 0;
+    Map<Integer, Node> keyNode;
+    Map<Integer, DLL> freqMap;
 
-    Map<Integer, Node> cache = new HashMap<>();
-    Map<Integer, DLL> freqMap = new HashMap<>();
+    int capacity;
+    int minFreq;
+    int curSize;
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
+        minFreq = 0;
+        curSize = 0;
+        keyNode = new HashMap<>();
+        freqMap = new HashMap<>();
+    }
+
+    private void update(Node node) {
+
+        keyNode.remove(node.key);
+
+        DLL list = freqMap.get(node.cnt);
+        list.removeNode(node);
+
+        if (node.cnt == minFreq && list.size == 0)
+            minFreq++;
+
+        node.cnt++;
+
+        DLL newList = freqMap.getOrDefault(node.cnt, new DLL());
+        newList.addFront(node);
+
+        freqMap.put(node.cnt, newList);
+        keyNode.put(node.key, node);
     }
 
     public int get(int key) {
 
-        Node node = cache.get(key);
-
-        if (node == null)
+        if (!keyNode.containsKey(key))
             return -1;
 
+        Node node = keyNode.get(key);
         update(node);
 
         return node.value;
@@ -73,49 +90,29 @@ class LFUCache {
         if (capacity == 0)
             return;
 
-        Node node = cache.get(key);
-
-        if (node != null) {
+        if (keyNode.containsKey(key)) {
+            Node node = keyNode.get(key);
             node.value = value;
             update(node);
             return;
         }
 
-        if (cache.size() == capacity) {
+        if (curSize == capacity) {
             DLL list = freqMap.get(minFreq);
-            Node removed = list.removeLast();
-            cache.remove(removed.key);
-
-            if (list.size == 0)
-                freqMap.remove(minFreq);
+            keyNode.remove(list.tail.prev.key);
+            list.removeNode(list.tail.prev);
+            curSize--;
         }
 
-        Node newNode = new Node(key, value);
-
+        curSize++;
         minFreq = 1;
 
-        freqMap.computeIfAbsent(1, k -> new DLL()).add(newNode);
+        DLL list = freqMap.getOrDefault(1, new DLL());
 
-        cache.put(key, newNode);
-    }
+        Node node = new Node(key, value);
+        list.addFront(node);
 
-    private void update(Node node) {
-
-        int oldFreq = node.freq;
-
-        DLL oldList = freqMap.get(oldFreq);
-
-        oldList.remove(node);
-
-        if (oldList.size == 0) {
-            freqMap.remove(oldFreq);
-
-            if (oldFreq == minFreq)
-                minFreq++;
-        }
-
-        node.freq++;
-
-        freqMap.computeIfAbsent(node.freq, k -> new DLL()).add(node);
+        keyNode.put(key, node);
+        freqMap.put(1, list);
     }
 }
