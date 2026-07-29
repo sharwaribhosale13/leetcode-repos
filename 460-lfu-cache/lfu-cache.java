@@ -3,13 +3,12 @@ import java.util.*;
 class LFUCache {
 
     class Node {
-        int key, value, freq;
+        int key, val, freq = 1;
         Node prev, next;
 
-        Node(int key, int value) {
-            this.key = key;
-            this.value = value;
-            this.freq = 1;
+        Node(int k, int v) {
+            key = k;
+            val = v;
         }
     }
 
@@ -26,10 +25,8 @@ class LFUCache {
         void add(Node node) {
             node.next = head.next;
             node.prev = head;
-
             head.next.prev = node;
             head.next = node;
-
             size++;
         }
 
@@ -40,83 +37,57 @@ class LFUCache {
         }
 
         Node removeLast() {
-            if (size == 0)
-                return null;
-
+            if (size == 0) return null;
             Node node = tail.prev;
             remove(node);
             return node;
         }
     }
 
-    int capacity;
-    int minFreq = 0;
-
-    HashMap<Integer, Node> cache = new HashMap<>();
-    HashMap<Integer, DLL> freqMap = new HashMap<>();
+    int cap, minFreq = 0;
+    Map<Integer, Node> cache = new HashMap<>();
+    Map<Integer, DLL> freqMap = new HashMap<>();
 
     public LFUCache(int capacity) {
-        this.capacity = capacity;
+        cap = capacity;
     }
 
     public int get(int key) {
-
-        if (!cache.containsKey(key))
-            return -1;
-
+        if (!cache.containsKey(key)) return -1;
         Node node = cache.get(key);
         update(node);
-
-        return node.value;
+        return node.val;
     }
 
     public void put(int key, int value) {
-
-        if (capacity == 0)
-            return;
+        if (cap == 0) return;
 
         if (cache.containsKey(key)) {
             Node node = cache.get(key);
-            node.value = value;
+            node.val = value;
             update(node);
             return;
         }
 
-        if (cache.size() == capacity) {
-            DLL list = freqMap.get(minFreq);
-            Node remove = list.removeLast();
-            cache.remove(remove.key);
+        if (cache.size() == cap) {
+            Node node = freqMap.get(minFreq).removeLast();
+            cache.remove(node.key);
         }
 
         Node node = new Node(key, value);
-
         minFreq = 1;
-
-        DLL list = freqMap.getOrDefault(1, new DLL());
-        list.add(node);
-
-        freqMap.put(1, list);
-
+        freqMap.computeIfAbsent(1, k -> new DLL()).add(node);
         cache.put(key, node);
     }
 
     private void update(Node node) {
-
-        int freq = node.freq;
-
-        DLL list = freqMap.get(freq);
-
+        DLL list = freqMap.get(node.freq);
         list.remove(node);
 
-        if (freq == minFreq && list.size == 0)
+        if (node.freq == minFreq && list.size == 0)
             minFreq++;
 
         node.freq++;
-
-        DLL newList = freqMap.getOrDefault(node.freq, new DLL());
-
-        newList.add(node);
-
-        freqMap.put(node.freq, newList);
+        freqMap.computeIfAbsent(node.freq, k -> new DLL()).add(node);
     }
 }
