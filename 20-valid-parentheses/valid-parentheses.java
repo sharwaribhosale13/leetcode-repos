@@ -24,13 +24,4 @@ public class Solution {
         return st.isEmpty();  // True if all brackets matched
     }
 
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        String s = "()[{}()]";
-
-        if (sol.isValid(s))
-            System.out.println("True");
-        else
-            System.out.println("False");
-    }
 }
