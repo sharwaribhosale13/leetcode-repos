@@ -1,36 +1,36 @@
-class Solution {
+import java.util.Stack;
+
+public class Solution {
+    // Function to check if the input string has valid parentheses
     public boolean isValid(String s) {
-        HashMap <Character,Character>mappedBrackets=new HashMap<>();
+        Stack<Character> st = new Stack<>();  // Stack to store opening brackets
 
-        mappedBrackets.put(')','(');
-        mappedBrackets.put('}','{');
-        mappedBrackets.put(']','[');
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' || ch == '{' || ch == '[')
+                st.push(ch);  // Push opening brackets to stack
+            else {
+                if (st.isEmpty()) return false;  // No matching opening bracket
+                char top = st.pop();
 
-        Stack <Character > stack=new Stack<>() ;
-
-        for(int i=0;i<s.length();i++)
-        {
-            char c=s.charAt(i);
-
-            if(!mappedBrackets.containsKey(c))
-            {
-                stack.push(c);
-
-            }
-            else
-            {
-                if(stack.isEmpty())
-                {
+                // Check for matching pair
+                if ((ch == ')' && top == '(') ||
+                    (ch == ']' && top == '[') ||
+                    (ch == '}' && top == '{'))
+                    continue;
+                else
                     return false;
-
-                }
-                char topElement=stack.pop();
-                if(topElement != mappedBrackets.get(c))
-                {
-                    return false;
-                }
             }
-        }     
-          return stack.isEmpty();
+        }
+        return st.isEmpty();  // True if all brackets matched
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        String s = "()[{}()]";
+
+        if (sol.isValid(s))
+            System.out.println("True");
+        else
+            System.out.println("False");
     }
 }
