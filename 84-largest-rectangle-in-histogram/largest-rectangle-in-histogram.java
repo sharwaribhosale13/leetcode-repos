@@ -25,9 +25,5 @@ class Solution {
         return maxArea;
     }
 
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        int[] histo = {2, 1, 5, 6, 2, 3, 1};
-        System.out.println("The largest area in the histogram is " + sol.largestRectangleArea(histo));
-    }
+    
 }
