@@ -4,9 +4,10 @@ class Solution {
         int profit = 0;
 
         for (int i = 1; i < arr.length; i++) {
+             mini = Math.min(mini, arr[i]);
             int cost = arr[i] - mini;
             profit = Math.max(profit, cost);
-            mini = Math.min(mini, arr[i]);
+           
         }
 
         return profit;
