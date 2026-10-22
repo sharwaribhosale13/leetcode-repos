@@ -17,4 +17,20 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0101-symmetric-tree](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0101-symmetric-tree) |
+## Array
+|  |
+| ------- |
+| [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
+## Dynamic Programming
+|  |
+| ------- |
+| [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
+## Knapsack Problem
+|  |
+| ------- |
+| [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
+## Complete Knapsack
+|  |
+| ------- |
+| [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
 <!---LeetCode Topics End-->
