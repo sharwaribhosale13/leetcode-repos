@@ -25,6 +25,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
+| [1143-longest-common-subsequence](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/1143-longest-common-subsequence) |
 ## Knapsack Problem
 |  |
 | ------- |
@@ -33,4 +34,12 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
+## String
+|  |
+| ------- |
+| [1143-longest-common-subsequence](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/1143-longest-common-subsequence) |
+## Longest Common Subsequence
+|  |
+| ------- |
+| [1143-longest-common-subsequence](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/1143-longest-common-subsequence) |
 <!---LeetCode Topics End-->
