@@ -20,10 +20,12 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0198-house-robber](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0198-house-robber) |
 | [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
 ## Dynamic Programming
 |  |
 | ------- |
+| [0198-house-robber](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0198-house-robber) |
 | [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
 | [1143-longest-common-subsequence](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/1143-longest-common-subsequence) |
 ## Knapsack Problem
