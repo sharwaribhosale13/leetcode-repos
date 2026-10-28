@@ -27,6 +27,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Dynamic Programming
 |  |
 | ------- |
+| [0005-longest-palindromic-substring](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0005-longest-palindromic-substring) |
 | [0091-decode-ways](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0091-decode-ways) |
 | [0198-house-robber](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0198-house-robber) |
 | [0518-coin-change-ii](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0518-coin-change-ii) |
@@ -42,6 +43,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0005-longest-palindromic-substring](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0005-longest-palindromic-substring) |
 | [0091-decode-ways](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0091-decode-ways) |
 | [1143-longest-common-subsequence](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/1143-longest-common-subsequence) |
 ## Longest Common Subsequence
@@ -56,4 +58,12 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0133-clone-graph](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0133-clone-graph) |
+## Two Pointers
+|  |
+| ------- |
+| [0005-longest-palindromic-substring](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0005-longest-palindromic-substring) |
+## Manacher
+|  |
+| ------- |
+| [0005-longest-palindromic-substring](https://github.com/sharwaribhosale13/leetcode-repos/tree/master/0005-longest-palindromic-substring) |
 <!---LeetCode Topics End-->
